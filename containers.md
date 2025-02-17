@@ -60,3 +60,5 @@ Advanced features I may not immediately benefit from:
   - Making my own would require a lot more effort.  I'd have to make a bash script to initialize the database, configure everything, etc.
   - By comparison, using the official image would require only a single terminal command to launch.
     - This command would include all the relevant details, such as user/pass, persistent storage, etc.
+- I feel like I'm going in circles here, as I'm trying to use tools in ways they weren't intended as a result of my current learning plan.
+  - I might do better if I try learning containers *while* also implementing them with Kubernetes.
