@@ -3,7 +3,9 @@
 # This bash script is intended to launch my growing stack of Docker containers.
 # TODO: Make this script idempotent.
 #   - Don't create a network if it already exists.
-#   - Recognize and use existing images.  Update these images as needed?
+#   - Recognize and use existing images.
+# NOTE: This is NOT good for long-term maintenance.
+#   - I'm creating images from the command line, rather than using a Dockerfile.
 
 # Create a network for my containers to use:
 docker network create my-network
