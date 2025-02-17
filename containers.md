@@ -43,3 +43,20 @@ Advanced features I may not immediately benefit from:
 - **Secure**: Minimal attack surface, no hard-coded secrets, regular patching.
 - **Maintainable**: Clear Dockerfiles, logical layering, consistent builds.
 - **Stable**: Predictable, versioned images.
+
+## Feb. 16 Update
+
+- I need to decide how much of Docker's proprietary features I'm willing to use for the container portion of my independent study.
+  - Docker Compose can be used in place of Kubernetes for multi-container systems.
+  - Docker Volumes can be used for persistent storage.
+  - Docker has proprietary networking features.
+  - Docker secrets to secure passwords.
+- Given the above, and my desire to transition to Kubernetes, I'll focus on using features that will be easily replaced.
+  - Namely, I'll use Docker networks and volumes for now, but avoid Compose.
+- I need to create or define persistent storage.
+  - This can be a filesystem directory, or a Docker Volume.
+- I need to define a network to allow containers to communicate with each other.
+- I've discovered that I should be using the official MariaDB docker image rather than make my own.
+  - Making my own would require a lot more effort.  I'd have to make a bash script to initialize the database, configure everything, etc.
+  - By comparison, using the official image would require only a single terminal command to launch.
+    - This command would include all the relevant details, such as user/pass, persistent storage, etc.
