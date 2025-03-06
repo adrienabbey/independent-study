@@ -1,0 +1,21 @@
+# My first attempt at deploying a Docker image across my Kubernetes cluster.
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-first-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-app
+  template:
+    metadata:
+      labels:
+        app: test-app
+    spec:
+      containers:
+        - name: my-test-container
+          image: helloworld
+          ports:
+            - containerPort: 80
