@@ -20,3 +20,14 @@
 - For several years now, I've been running VMs on a server at home.  These VMs run everything from Nextcloud (synchronizing file, calendar, tasks, contacts, etc. across all my devices) to test beds for exploring new technologies (like containers and Kubernetes!).
 - While I've been very happy with my VMs, the hardware required to run them is expensive and requires significant power draw to run 24/7.  When considering alternatives, I realized I could get similar benefits at a much lower cost if I were to migrate to containers running on a Kubernetes cluster across multiple Raspberry Pis.
 - Perhaps more crucially, I needed two more 4000-level credit hours, and this became a great opportunity to finally get the motivation to learn.  So here we are.
+
+## 2025-03-06 Update
+
+- Created a Microk8s VM cluster for learning purposes.  This lets me easily create snapshots and rollback if I make a mistake.
+- My first goal is to learn how to deploy a simple Docker container on the cluster.
+
+### TODO
+
+1. Create a GitLab container repository for my containers.
+2. Create a Docker container that I can deploy on my cluster.  A good start would be a MariaDB container.
+3. Deploy that container to my microk8s cluster.
