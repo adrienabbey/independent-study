@@ -1,0 +1,17 @@
+# Example code from ChatGPT.
+# Intended to test using GitLab as a container repository.
+
+# Use a lightweight Python image
+FROM python:3.9-slim
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Create a simple HTML file to serve
+RUN echo "Hello, World from my GitLab container repository!" > index.html
+
+# Expose port 8000 to serve the page
+EXPOSE 8000
+
+# Run Python's built-in HTTP server
+CMD ["python", "-m", "http.server", "8000"]
