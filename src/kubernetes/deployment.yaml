@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: repo-test
-          image: registry.gitlab.sevriem.net/sevriem/independent-study/repo-test:latest
+          image: registry.gitlab.sevriem.net/sevriem/independent-study/repo-test
           ports:
             - containerPort: 8000
       # Only include the imagePullSecrets if your registry requires authentication.
