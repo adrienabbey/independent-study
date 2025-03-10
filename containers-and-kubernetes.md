@@ -35,11 +35,35 @@
 ### TODO
 
 1. Create a GitLab container repository for my containers. **DONE!**
-2. Create a Docker container that I can deploy on my cluster. A good start would be a MariaDB container. _In Progress..._
-3. Deploy that container to my microk8s cluster.
+2. Create a Docker container that I can deploy on my cluster. **DONE!**
+3. Deploy that container to my microk8s cluster. **DONE!**
 
 ## 2025-03-07 Update
 
 - Began learning how to use GitLab to host my container images.
   - Discovered I needed to configure a CNAME on my router in order to properly resolve the registry subdomain
   - Got the container repository working!
+
+### Details
+
+- Create an GitLab _User_ Access Token. _Project_ access tokens do NOT work.
+- CD into the directory containing the Dockerfile
+- Build the Docker image: `docker build -t repo-test .`
+- Log into my GitLab container repo: `docker login registry.gitlab.sevriem.net`
+- Tag the Docker image before pushing it: `docker tag repo-test registry.gitlab.sevriem.net/sevriem/independent-study/repo-test:latest`
+- Finally, push the Docker image to my repo: `docker push registry.gitlab.sevriem.net/sevriem/independent-study/repo-test:latest`
+
+## 2025-03-09 Update
+
+- Began learning how to deploy the Docker image hosted on my GitLab instance to Kubernetes.
+- Success! Kubernetes successfully pulls the image from my GitLab instance and deploys the image.
+- **TODO**: Figure out the proper way to open that container in a browser...
+
+### Details
+
+- SSH into one of the MicroK8s nodes.
+- Clone the _GitHub_ repo to the local node.
+- Create a Kubernetes secret to log into the GitLab repo: `microk8s kubectl create secret docker-registry gitlab-registry --docker-server=registry.gitlab.sevriem.net --docker-username=sevriem --docker-password=ACCESS-TOKEN-GOES-HERE --docker-email=sevriem@gmail.com`
+- CD into the directory containing the Kubernetes deployment.yaml file.
+- Apply the deployment file: `microk8s kubectl apply -f deployment.yaml`
+- Verify the pod deployed successfully: `microk8s kubectl get pods`
