@@ -1,21 +1,25 @@
-# My first attempt at deploying a Docker image across my Kubernetes cluster.
+# Example code from ChatGPT
+# Deploys my example container from my GitLab repo.
 
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-first-deployment
+  name: repo-test
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: test-app
+      app: repo-test
   template:
     metadata:
       labels:
-        app: test-app
+        app: repo-test
     spec:
       containers:
-        - name: my-test-container
-          image: helloworld
+        - name: repo-test
+          image: registry.gitlab.sevriem.net/sevriem/independent-study/repo-test:latest
           ports:
-            - containerPort: 80
+            - containerPort: 8000
+      # Only include the imagePullSecrets if your registry requires authentication.
+      imagePullSecrets:
+        - name: gitlab-registry
