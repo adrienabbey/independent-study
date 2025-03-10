@@ -26,8 +26,20 @@
 - Created a Microk8s VM cluster for learning purposes. This lets me easily create snapshots and rollback if I make a mistake.
 - My first goal is to learn how to deploy a simple Docker container on the cluster.
 
+### I accomplished the following today:
+
+- Created three Ubuntu VMs running MicroK8s, all of which are now part of the same cluster.
+- Created another VM to run GitLab CE on. I'll use this to manage my container images.
+- Configured the GitLab CE VM to use Let's Encrypt certificates (using DNS challenges) and enabled the container repository.
+
 ### TODO
 
-1. Create a GitLab container repository for my containers.
-2. Create a Docker container that I can deploy on my cluster. A good start would be a MariaDB container.
+1. Create a GitLab container repository for my containers. **DONE!**
+2. Create a Docker container that I can deploy on my cluster. A good start would be a MariaDB container. _In Progress..._
 3. Deploy that container to my microk8s cluster.
+
+## 2025-03-07 Update
+
+- Began learning how to use GitLab to host my container images.
+  - Discovered I needed to configure a CNAME on my router in order to properly resolve the registry subdomain
+  - Got the container repository working!
