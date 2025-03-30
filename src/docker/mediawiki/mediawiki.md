@@ -28,3 +28,7 @@ Documentation for deploying MediaWiki across my Kubernetes cluster.
   - Namespaces allow for isolating resources. This means I can keep my gitlab runners and my project containers isolated from one another.
 - Ran into issues with DNS within containers. Troubleshooting now.
   - Attempting to specify my local DNS server.
+  - Turned out I was missing an essential Calico port. Calico is used to enable network communication between containers.
+- While I fixed one problem, my GitLab runner is still failing, claiming DNS lookup failures.
+  - If I open the container's shell, I can get results from an nslookup of my GitLab instance without error.
+  - Apparently the runner spawns a helper container, and that might be failing.
