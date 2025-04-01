@@ -45,7 +45,8 @@ Documentation for deploying MediaWiki across my Kubernetes cluster.
 - I wanted a distributed file system for my cluster that would allow for files from a container on one node to be distributed and saved across the cluster. This not only ensures that I won't lose data if a node fails, but also ensures that I can launch a container on any node without concern about data integrity.
 - I need to be mindful that I intend for this to eventually run on my Raspberry Pi cluster. That means official ARM support and lightweight requirements, while keeping the replication. Originally I was leaning towards Longhorn, but that would have been a tight fit on the Raspberry Pis.
 - The solution is thus OpenEBS.
-- I used Helm to install OpenEBS across my cluster using its official chart.
+- ~~I used Helm to install OpenEBS across my cluster using its official chart.~~
+  - I rebuilt my MicroK8s cluster and installed it using the built-in MicroK8s community option.
 
 ## Creating the Containers
 
@@ -62,3 +63,8 @@ Documentation for deploying MediaWiki across my Kubernetes cluster.
   - It also pulls the DB information from the MariaDB secrets from earlier.
   - Mounts the persistent storage too.
   - The service file specifies a `NodePort`. This instructs each node in the cluster to open this port so that the container can be externally accessed.
+- Applying the above went into a "Pending" state. I turned out I needed to create a storage class for OpenEBS: `
+`openebs-hostpath.sc.yaml`
+- Fixed. I just needed to **rebuild my entire MicroK8s cluster**...
+- I can open my MediaWiki page, but I get a "Forbidden" error.
+  - It appears the files did not copy properly. Updating my MediaWiki deployment file to fix it.
