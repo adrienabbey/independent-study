@@ -2,6 +2,8 @@
 
 Documentation for deploying MediaWiki across my Kubernetes cluster.
 
+> Note: I used ChatGPT heavily to research and get configuration for most of this. I made an effort to manually review and adjust these files to my needs, and have a good general idea of what they do. I'm not aiming to learn the detailed syntax of these files, as that's not what I had in mind for my intended scope of this project.
+
 ## Goals
 
 - Deploy a private MediaWiki site to my Kubernetes cluster.
@@ -47,4 +49,16 @@ Documentation for deploying MediaWiki across my Kubernetes cluster.
 
 ## Creating the Containers
 
-- 
+- Start by creating a Kubernetes secrets file for the MariaDB passwords.
+  - This file has secrets! I added it to `.gitignore` so I don't go spraying my undesirables all over the Internets.
+- Created persistent OpenEBS volumes for each container: `mariadb-pvc.yaml` and `mediawiki-pvc.yaml`
+  - I adjusted the ChatGPT recommendations down to 1 Gi each, which should be overkill for what I'm doing.
+- Created a Kubernetes deployment and service file for MariaDB: `mariadb-deployment.yaml` and `mariadb-service.yaml`
+  - The deployment file selects the official MariaDB container on Docker Hub, sets the users/passwords, and creates the database for MediaWiki using the Kubernetes secrets configured earlier. It also attaches the persistent volumes created in the previous step.
+  - The service file opens the port on the container. I believe this is only accessible from the local machine and/or containers.
+  - The deployment file did _not_ specify a port, unlike the one for MediaWiki. I believe this may restrict access further.
+- Did the same for the MediaWiki container: `mediawiki-deployment.yaml` and `mediawiki-service.yaml`
+  - This deployment file _does_ specify a port (80).
+  - It also pulls the DB information from the MariaDB secrets from earlier.
+  - Mounts the persistent storage too.
+  - The service file specifies a `NodePort`. This instructs each node in the cluster to open this port so that the container can be externally accessed.
