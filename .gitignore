@@ -1,1 +1,2 @@
 src/kubernetes/mediawiki-secrets.yaml
+src/docker/mediawiki/LocalSettings.php
