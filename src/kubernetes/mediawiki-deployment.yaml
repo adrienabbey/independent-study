@@ -3,15 +3,22 @@ kind: Deployment
 metadata:
   name: mediawiki
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: mediawiki
-  replicas: 1
   template:
     metadata:
       labels:
         app: mediawiki
     spec:
+      initContainers:
+        - name: init-copy-mediawiki
+          image: mediawiki:latest
+          command: ["sh", "-c", "cp -r /var/www/html/* /mediawiki-data"]
+          volumeMounts:
+            - name: mediawiki-storage
+              mountPath: /mediawiki-data
       containers:
         - name: mediawiki
           image: mediawiki:latest
