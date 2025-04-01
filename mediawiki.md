@@ -68,3 +68,6 @@ Documentation for deploying MediaWiki across my Kubernetes cluster.
 - Fixed. I just needed to **rebuild my entire MicroK8s cluster**...
 - I can open my MediaWiki page, but I get a "Forbidden" error.
   - It appears the files did not copy properly. Updating my MediaWiki deployment file to fix it.
+  - Fixed.
+- Ran MediaWiki first-time setup. Need to copy the provided `LocalSettings.php` into the container with: `microk8s kubectl cp ./LocalSettings.php <mediawiki-pod-name>:/var/www/html/LocalSettings.php`
+- IT WORKS!
