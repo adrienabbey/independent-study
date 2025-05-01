@@ -1,1 +1,2 @@
-containers/mariadb/.mariadb_password
+src/kubernetes/mediawiki-secrets.yaml
+src/mediawiki/LocalSettings.php
